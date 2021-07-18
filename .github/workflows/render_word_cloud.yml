@@ -1,0 +1,30 @@
+on:
+  push:
+    paths:
+      - 'data/hep_arxiv.rds'
+
+name: Render word cloud
+
+jobs:
+  render:
+    name: Render word cloud
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v1
+      - name: Install dependencies
+        run: |
+          install.packages("text2vec")
+          install.packages("data.table")
+          install.packages("dplyr")
+          install.packages("magrittr")
+          install.packages("dtplyr")
+          install.packages(ggwordcloud)
+        shell: Rscript {0}
+      - name: Run word cloud R script
+        run: Rscript R/word_cloud.R
+      - name: Commit results
+        run: |
+          git add -A
+          git commit -m 'update hep_arxiv.rds' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"

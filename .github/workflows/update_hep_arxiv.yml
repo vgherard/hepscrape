@@ -1,0 +1,28 @@
+on:
+  schedule:
+    - cron: '59 23 * * *'
+
+name: Update hep-arxiv dataset
+
+jobs:
+  update:
+    name: Update hep-arxiv dataset
+    runs-on: macOS-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: r-lib/actions/setup-r@v1
+      - name: Install dependencies
+        run: |
+          install.packages("aRxiv")
+          install.packages("dplyr")
+          install.packages("magrittr")
+          install.packages("lubridate")
+          install.packages("kgrams")
+        shell: Rscript {0}
+      - name: Update hep_arxiv
+        run: Rscript data-raw/update_hep_arxiv.R
+      - name: Commit results
+        run: |
+          git add -A
+          git commit -m 'update hep_arxiv.rds' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
