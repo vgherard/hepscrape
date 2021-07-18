@@ -59,6 +59,6 @@ plot <- ggplot(tbl,
 	     subtitle = paste("Last update:", Sys.Date())
 	     )
 
-png("img/cloud.png", width = 640, height = 480, res = 110)
+png("img/cloud.png", width = 680, height = 480, res = 110)
 print(plot)
 dev.off()
