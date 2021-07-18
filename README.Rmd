@@ -28,6 +28,10 @@ The resulting dataset is stored in R serialized data format (.rds) in `data/hep_
 - abstract
 ```
 
+This dataset is kept up-to-date with the full [arXiv Metadata OAI Snapshot](https://www.kaggle.com/Cornell-University/arxiv), and it contains all arXiv:hep-ph records over the last 30 years.
+
 More info coming soon.
 
-![hep-ph word cloud](img/cloud.png)
+
+
+![hep-ph word cloud](https://raw.githubusercontent.com/vgherard/hepscrape/master/img/cloud.png)
