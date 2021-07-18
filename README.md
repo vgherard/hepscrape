@@ -26,3 +26,8 @@ More info coming soon.
 
 ![hep-ph word
 cloud](https://raw.githubusercontent.com/vgherard/hepscrape/master/img/cloud.png)
+
+Figure: Term-Frequency - Inverse-Document-Frequency word cloud from
+hep-ph abstract. Term-frequencies are averaged over the last 100 arXiv
+submissions, while Inverse Document Frequencies are computed from the
+whole arXiv Metadata OAI Snapshot corpus.
