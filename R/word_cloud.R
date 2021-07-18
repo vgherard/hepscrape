@@ -50,15 +50,13 @@ plot <- ggplot(tbl,
        )
 ) +
 	geom_text_wordcloud(
-		shape = "circle", eccentricity = 1, show.legend = T, rm_outside = T) +
+		shape = "circle", eccentricity = 1, show.legend = T) +
 	theme_minimal() +
 	scale_color_gradient(low = "blue", high = "red", guide = "colourbar") +
 	labs(color = "binary tf-idf  (avg @ last 100)",
 	     size = "tf-idf (avg @ last 100)"
 	     )
 
-png("img/cloud.png")
+png("img/cloud.png", width = 640, height = 480, res = 110)
 print(plot)
 dev.off()
-
-ggsave("img/cloud.png", device = "png", width = 10, height = 8)
