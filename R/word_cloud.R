@@ -54,7 +54,9 @@ plot <- ggplot(tbl,
 	theme_minimal() +
 	scale_color_gradient(low = "blue", high = "red", guide = "colourbar") +
 	labs(color = "binary tf-idf  (avg @ last 100)",
-	     size = "tf-idf (avg @ last 100)"
+	     size = "tf-idf (avg @ last 100)",
+	     title = "Trends in hep-ph",
+	     subtitle = paste("Last update:", Sys.Date())
 	     )
 
 png("img/cloud.png", width = 640, height = 480, res = 110)
