@@ -43,7 +43,7 @@ tbl <- tibble(
 	#mutate(rand_angle = 90 * sample(0:1, n(), replace = T)) %>%
 	{.}
 
-ggplot(tbl,
+plot <- ggplot(tbl,
        aes(label = word, size = size
            ,angle = rand_angle
            ,color = color
@@ -57,5 +57,8 @@ ggplot(tbl,
 	     size = "tf-idf (avg @ last 100)"
 	     )
 
-ggsave("img/cloud.pdf", device = "pdf", width = 12, height = 6)
+png("img/cloud.png")
+print(plot)
+dev.off()
+
 ggsave("img/cloud.png", device = "png", width = 10, height = 8)
