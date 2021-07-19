@@ -22,6 +22,7 @@ jobs:
         run: |
           Rscript -e "reticulate::py_install("pylatexenc")"
       - name: Rebuild hep_arxiv
+        env: KAGGLE_API_AUTH: ${{ secrets.KAGGLE_API_AUTH }}
         run: Rscript data-raw/hep_kaggle.R
       - name: Commit results
         run: |

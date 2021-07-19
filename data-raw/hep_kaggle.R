@@ -10,7 +10,7 @@ if (!require(kaggler)) {
 # Download to temporary file
 temp <- tempfile()
 
-kgl_auth(creds_file = "~/.kaggle/kaggle.json")
+kgl_auth(username = "valeriogherardi", key = Sys.getenv("KAGGLE_API_AUTH"))
 
 # Get Goggle Cloud storage URL
 response <- kgl_datasets_download_all(owner_dataset = "Cornell-University/arxiv")
