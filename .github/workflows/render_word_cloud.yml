@@ -15,11 +15,9 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages("text2vec")
-          install.packages("data.table")
           install.packages("dplyr")
           install.packages("magrittr")
-          install.packages("dtplyr")
-          install.packages(ggwordcloud)
+          install.packages("ggwordcloud")
         shell: Rscript {0}
       - name: Run word cloud R script
         run: Rscript R/word_cloud.R

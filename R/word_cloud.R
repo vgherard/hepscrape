@@ -1,4 +1,3 @@
-library(aRxiv)
 library(text2vec)
 library(dplyr)
 library(magrittr)
