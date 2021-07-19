@@ -1,6 +1,10 @@
-on: workflow_dispatch
+on:
+  schedule:
+    - cron: '59 23 * * *'
+  workflow_dispatch:
 
-name: Update dataset
+
+name: Update hep-arxiv dataset
 
 jobs:
   update:
@@ -17,8 +21,6 @@ jobs:
           install.packages("lubridate")
           install.packages("kgrams")
           install.packages("reticulate")
-          install.packages("remotes")
-          remotes::install_github("ldurazo/kaggler")
         shell: Rscript {0}
       - name: Install Python dependencies
         run: |
