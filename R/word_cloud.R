@@ -6,7 +6,7 @@ library(ggwordcloud)
 hep_arxiv <- readRDS("data/hep_arxiv.rds")
 
 it <- itoken(hep_arxiv$abstract,
-	     preprocessor = kgrams::preprocess,
+	     preprocessor = identity,
 	     tokenizer = word_tokenizer,
 	     ids = hep_arxiv$id,
 	     progressbar = TRUE
