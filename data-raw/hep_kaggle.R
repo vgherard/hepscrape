@@ -1,16 +1,34 @@
 library(dplyr)
 library(magrittr)
+if (!require(kaggler)) {
+	devtools::install_github("ldurazo/kaggler")
+	library(kaggler)
+}
 
-# TODO:
-# Replace local stored data with download from
-# https://www.kaggle.com/Cornell-University/arxiv
+#-------------------------------------------------- Download dataset from Kaggle
 
+# Download to temporary file
+temp <- tempfile()
+
+kgl_auth(creds_file = "~/.kaggle/kaggle.json")
+
+# Get Goggle Cloud storage URL
+response <- kgl_datasets_download_all(owner_dataset = "Cornell-University/arxiv")
+
+# Set timeout to 600 second for large file
+options(timeout = max(600, getOption("timeout")))
+
+# Download to temp
+download.file(response[["url"]], temp)
 
 #--------------------------------------------------- Stream arXiv data from JSON
+
+# Read hep-ph entries from JSON stream and store in temporary environment
 arxiv_data <- new.env()
-x <- jsonlite::stream_in(
-	file("data-raw/arxiv-metadata-oai-snapshot.json"),
+jsonlite::stream_in(
+	unz(temp, "arxiv-metadata-oai-snapshot.json"),
 	handler = function(df) {
+		# Store hep-ph batches in environment
 		page_id <- as.character(length(arxiv_data) + 1)
 		hep_entries <- grepl(
 			pattern = "hep-ph", x = df$categories, fixed = T
@@ -18,14 +36,19 @@ x <- jsonlite::stream_in(
 		arxiv_data[[page_id]] <- df[hep_entries, ]
 		}
 	)
-arxiv_data %<>% as.list()
 
-# Number of records
-n <- sum(sapply(arxiv_data, nrow))
+# Delete temporary file
+unlink(temp)
+
+# Convert to list
+arxiv_data %<>% as.list()
 
 
 
 #--------------------------------------------- Merge data from different batches
+
+# Number of records
+n <- sum(sapply(arxiv_data, nrow))
 
 tib <- lapply(arxiv_data, function(df) {
 	df %<>%
