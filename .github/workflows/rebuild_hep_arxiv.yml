@@ -1,10 +1,10 @@
 on: workflow_dispatch
 
-name: Rebuild hep-arxiv dataset from arXiv Metadata OAI Snapshot
+name: Rebuild hep-arxiv dataset
 
 jobs:
   update:
-    name: Update hep-arxiv dataset
+    name: Rebuild hep-arxiv dataset
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
@@ -17,7 +17,7 @@ jobs:
           install.packages("lubridate")
           install.packages("kgrams")
           install.packages("reticulate")
-          shell: Rscript {0}
+        shell: Rscript {0}
       - name: Install Python dependencies
         run: |
           Rscript -e "reticulate::py_install("pylatexenc")"
