@@ -1,9 +1,10 @@
 library(dplyr)
 library(magrittr)
 if (!require(kaggler)) {
-	devtools::install_github("ldurazo/kaggler")
+	remotes::install_github("ldurazo/kaggler")
 	library(kaggler)
 }
+source("R/preprocess.R")
 
 #-------------------------------------------------- Download dataset from Kaggle
 
@@ -66,12 +67,6 @@ tib <- lapply(arxiv_data, function(df) {
 
 #---------------------------------------------------------------- Transform data
 
-tryCatch(
-	source("R/preprocess.R"),
-	error = function(cnd) {
-		cat("Unable to load 'preprocess.R'. Aborting.")
-		quit(save = "no")
-	})
 tib %<>%
 	mutate(title = text_preprocess(title),
 	       abstract = text_preprocess(abstract),
