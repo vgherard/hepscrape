@@ -1,9 +1,7 @@
 library(aRxiv)
 library(text2vec)
-#library(data.table)
 library(dplyr)
 library(magrittr)
-#library(dtplyr)
 library(ggwordcloud)
 
 hep_arxiv <- readRDS("data/hep_arxiv.rds")
