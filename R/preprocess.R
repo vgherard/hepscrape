@@ -11,12 +11,9 @@ text_preprocess <- function(x) {
 	x %>%
 		vapply(decode_latex, "", USE.NAMES = F) %>%
 		gsub("\\n", " ", .) %>%
-		kgrams::preprocess(
-			# Remove characters matched by the regex
-			erase = "",
-			# Put everything to lower case
-			lower_case = TRUE
-		)
+		# Remove punctuation
+		gsub("[.,!?;:]", " ", .) %>%
+		tolower
 }
 
 submitted_preprocess <- function(x) {
