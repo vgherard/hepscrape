@@ -1,4 +1,13 @@
+on:
+  schedule:
+    - cron: '59 23 * * *'
+  workflow_dispatch:
+
+
 - Add badges to README
 - Provide better install options... R package?
 - Ideas for analysis:
     - [LDA](https://cran.r-project.org/web/packages/topicmodels/vignettes/topicmodels.pdf)
+
+
+
