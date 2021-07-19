@@ -2,6 +2,7 @@ on:
   schedule:
     - cron: '59 23 * * *'
   workflow_dispatch:
+
 name: Update hep-arxiv dataset
 
 jobs:
@@ -19,6 +20,7 @@ jobs:
           install.packages("lubridate")
           install.packages("kgrams")
           install.packages("reticulate")
+          install.packages("remotes")
         shell: Rscript {0}
       - name: Install Python dependencies
         run: |
