@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - 'data/hep_arxiv.rds'
+  workflow_dispatch:
 
 name: Render word cloud
 
@@ -12,17 +13,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
-      - name: Install dependencies
+      - name: Install R dependencies
         run: |
           install.packages("text2vec")
           install.packages("dplyr")
           install.packages("magrittr")
           install.packages("ggwordcloud")
         shell: Rscript {0}
-      - name: Run word cloud R script
+      - name: Run word_cloud.R
         run: Rscript R/word_cloud.R
       - name: Commit results
         run: |
           git add -A
-          git commit -m 'update hep_arxiv.rds' || echo "No changes to commit"
+          git commit -m 'update word cloud' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
