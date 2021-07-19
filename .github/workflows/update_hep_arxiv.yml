@@ -22,7 +22,9 @@ jobs:
         shell: Rscript {0}
       - name: Install Python dependencies
         run: |
-          Rscript -e "reticulate::py_install("pylatexenc")"
+          Rscript -e "reticulate::install_miniconda()"
+          echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
+          Rscript -e "reticulate::conda_create('r-reticulate', packages = c('python==3.8', 'numpy', 'pylatexenc'))"
       - name: Update hep_arxiv
         run: Rscript R/update_hep_arxiv.R
       - name: Commit results
