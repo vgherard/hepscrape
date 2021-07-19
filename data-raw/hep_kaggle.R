@@ -26,6 +26,11 @@ download.file(response[["url"]], temp)
 
 # Read hep-ph entries from JSON stream and store in temporary environment
 arxiv_data <- new.env()
+
+tryCatch(
+# TODO:
+# The tryCatch() here is a temporary fix to deal with corrupt json towards
+# the very end of file. Find better solution.
 jsonlite::stream_in(
 	unz(temp, "arxiv-metadata-oai-snapshot.json"),
 	handler = function(df) {
@@ -36,7 +41,10 @@ jsonlite::stream_in(
 			)
 		arxiv_data[[page_id]] <- df[hep_entries, ]
 		}
-	)
+	),
+error = function(cnd)
+	cat("Found corrupt JSON. Some arXiv entries could have been removed.")
+)
 
 # Delete temporary file
 unlink(temp)
