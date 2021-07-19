@@ -30,6 +30,6 @@ jobs:
         run: Rscript R/update_hep_arxiv.R
       - name: Commit results
         run: |
-          git commit data/hep_arxiv.rds
+          git add data/hep_arxiv.rds
           git commit -m 'update hep_arxiv.rds' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
