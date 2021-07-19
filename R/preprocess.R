@@ -1,5 +1,6 @@
 library(reticulate, warn.conflicts = F, quietly = T)
 library(dplyr)
+reticulate::use_condaenv()
 latex2text <- reticulate::import("pylatexenc.latex2text")
 decode_latex <- function(x) {
 	try(x <- latex2text$latex2text(x, tolerant_parsing = T), silent = T)

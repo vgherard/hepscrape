@@ -20,7 +20,9 @@ jobs:
         shell: Rscript {0}
       - name: Install Python dependencies
         run: |
-          Rscript -e "reticulate::py_install("pylatexenc")"
+          Rscript -e "reticulate::install_miniconda()"
+          echo "options(reticulate.conda_binary = reticulate:::miniconda_conda())" >> .Rprofile
+          Rscript -e "reticulate::conda_create("r-reticulate", packages = c("python==3.8", "numpy", "pylatexenc"))"
       - name: Rebuild hep_arxiv
         env:
           KAGGLE_API_AUTH: ${{ secrets.KAGGLE_API_AUTH }}

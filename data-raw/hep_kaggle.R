@@ -66,7 +66,12 @@ tib <- lapply(arxiv_data, function(df) {
 
 #---------------------------------------------------------------- Transform data
 
-source("R/preprocess.R")
+tryCatch(
+	source("R/preprocess.R"),
+	error = function(cnd) {
+		cat("Unable to load 'preprocess.R'. Aborting.")
+		quit(save = "no")
+	})
 tib %<>%
 	mutate(title = text_preprocess(title),
 	       abstract = text_preprocess(abstract),
