@@ -11,14 +11,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: r-lib/actions/setup-r@v1
-      - name: Install dependencies
+      - name: Install R package dependencies
         run: |
           install.packages("aRxiv")
           install.packages("dplyr")
           install.packages("magrittr")
           install.packages("lubridate")
           install.packages("kgrams")
+          install.packages("reticulate")
         shell: Rscript {0}
+      - name: Install Python dependencies
+        run: |
+          Rscript -e "reticulate::py_install("pylatexenc")"
       - name: Update hep_arxiv
         run: Rscript R/update_hep_arxiv.R
       - name: Commit results
