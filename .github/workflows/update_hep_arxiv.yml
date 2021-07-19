@@ -1,8 +1,7 @@
 on:
   schedule:
     - cron: '59 23 * * *'
-  workflow_dispatch
-
+  workflow_dispatch:
 name: Update hep-arxiv dataset
 
 jobs:
