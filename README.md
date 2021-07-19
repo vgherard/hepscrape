@@ -4,6 +4,9 @@
 # hepscrape
 
 <!-- badges: start -->
+
+![example
+workflow](https://github.com/vgherard/hepscrape/actions/workflows/update_hep_arxiv.yml/badge.svg)
 <!-- badges: end -->
 
 This repository automatically scrapes [arXiv](https://arxiv.org/) on a
