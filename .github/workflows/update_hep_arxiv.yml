@@ -20,7 +20,7 @@ jobs:
           install.packages("kgrams")
         shell: Rscript {0}
       - name: Update hep_arxiv
-        run: Rscript data-raw/update_hep_arxiv.R
+        run: Rscript R/update_hep_arxiv.R
       - name: Commit results
         run: |
           git add -A
