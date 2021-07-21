@@ -19,8 +19,6 @@ jobs:
           install.packages("lubridate")
           install.packages("kgrams")
           install.packages("reticulate")
-          install.packages("remotes")
-          remotes::install_github("ldurazo/kaggler")
         shell: Rscript {0}
       - name: Install Python dependencies
         run: |

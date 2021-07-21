@@ -1,9 +1,6 @@
 library(dplyr)
 library(magrittr)
-if (!require(kaggler)) {
-	remotes::install_github("ldurazo/kaggler")
-	library(kaggler)
-}
+library(jsonlite)
 source("R/preprocess.R")
 
 #-------------------------------------------------- Download dataset from Kaggle
@@ -11,16 +8,26 @@ source("R/preprocess.R")
 # Download to temporary file
 temp <- tempfile()
 
-kgl_auth(username = "valeriogherardi", key = Sys.getenv("KAGGLE_API_AUTH"))
+# Get Kaggle credentials from environment variable or from kaggle.json
+if ((kgl_env_var <- Sys.getenv("KAGGLE_API_AUTH")) != "") {
+	ll <- strspit(kgl_env_var, ":")
+	kgl_creds <- list(user = ll[[1]][[1]], key = ll[[1]][[2]])
+} else {
+	kgl_creds <- fromJSON("~/.kaggle/kaggle.json", flatten = TRUE)
+}
 
-# Get Goggle Cloud storage URL
-response <- kgl_datasets_download_all(owner_dataset = "Cornell-University/arxiv")
+# Download zip as binary (in memory)
+base_url <- "https://www.kaggle.com/api/v1"
+owner_dataset <- "Cornell-University/arxiv"
+file <- "arxiv-metadata-oai-snapshot.json"
+url <- paste0(base_url, "/datasets/download/", owner_dataset, "/", file)
+response <- httr::GET(url,
+	  httr::authenticate(kgl_creds$username, kgl_creds$key, type = "basic")
+	  )
 
-# Set timeout to 600 second for large file
-options(timeout = max(600, getOption("timeout")))
-
-# Download to temp
-download.file(response[["url"]], temp)
+# Write binary to zip file
+writeBin(httr::content(response, "raw"), temp)
+rm(response)
 
 #--------------------------------------------------- Stream arXiv data from JSON
 
