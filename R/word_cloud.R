@@ -25,8 +25,8 @@ btf_avg_at_n <- Matrix::colMeans(dtm_binary[1:100, ])
 idf <- log(1 / Matrix::colMeans(dtm_binary))
 
 
-size <- tf_avg_at_n * idf ^ 1.5
-color <- btf_avg_at_n * idf ^ 1.5
+size <- tf_avg_at_n * (idf ^ 1.5)
+color <- tf_avg_at_n
 
 
 words <- names(size)
@@ -52,7 +52,7 @@ plot <- ggplot(tbl,
 	theme_minimal() +
 	scale_color_gradient(low = "blue", high = "red", guide = "colourbar") +
 	labs(size = "tf-idf (avg @ last 100)",
-	     color = "tp-idf  (avg @ last 100)",
+	     color = "tf (avg @ last 100)",
 	     title = "Trending words in hep-ph abstracts",
 	     subtitle = paste("Last update:", Sys.Date())
 	     )

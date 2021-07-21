@@ -35,4 +35,4 @@ More info coming soon.
 
 ![hep-ph word cloud](https://raw.githubusercontent.com/vgherard/hepscrape/master/img/cloud.png)
 
-Figure: Word cloud from hep-ph abstracts. Words' character sizes are proportional to their Term-Frequency - Inverse-Document-Frequency, whereas color gradients are proportional to Term-Presence - Inverse-Document-Frequency (a.k.a. binary tf-idf). The `idf` weight is given by `w = ln (1 / df) ^ 1.5`. Term-frequencies are averaged over the last 100 arXiv submissions, while Inverse Document Frequencies are computed from the whole arXiv Metadata OAI Snapshot corpus.
+Figure: Word cloud from hep-ph abstracts. Words' character sizes are proportional to their Term-Frequency - Inverse-Document-Frequency, whereas color gradients are proportional to Term-Frequency. The `idf` weight is given by `w = ln (1 / df) ^ 1.5`. Term-frequencies are averaged over the last 100 arXiv submissions, while Inverse Document Frequencies are computed from the whole arXiv Metadata OAI Snapshot corpus.
