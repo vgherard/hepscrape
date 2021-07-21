@@ -8,6 +8,8 @@ jobs:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.PAT }}
       - uses: r-lib/actions/setup-r@v1
       - name: Install R package dependencies
         run: |
@@ -32,5 +34,5 @@ jobs:
       - name: Commit results
         run: |
           git add -A
-          git commit -m 'Rebuild hep_arxiv.rds' || echo "No changes to commit"
+          git commit -m 'rebuild hep_arxiv.rds' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
