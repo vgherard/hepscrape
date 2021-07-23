@@ -9,6 +9,7 @@ if (!can_arxiv_connect()) {
 
 library(dplyr, warn.conflicts = F, quietly = T)
 library(magrittr, warn.conflicts = F, quietly = T)
+source("R/preprocess.R")
 
 hep_arxiv <- readRDS("data/hep_arxiv.rds")
 
@@ -63,14 +64,10 @@ if (nrow(res) == 0) {
 
 #---------------------------------------------------------- Preprocess text data
 
-source("R/preprocess.R")
-
 res %<>%
 	mutate(title = text_preprocess(title),
 	       abstract = text_preprocess(abstract)
 	)
-
-
 
 #------------------------------------------------------- Merge update to dataset
 
