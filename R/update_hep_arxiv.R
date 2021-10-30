@@ -18,8 +18,8 @@ hep_arxiv <- readRDS("data/hep_arxiv.rds")
 #------------------------------------ Select temporal window to look for updates
 
 last_submitted <- as.Date(hep_arxiv$submitted[[1]])
-from <- last_submitted - 7
-to <- last_submitted + 7
+from <- last_submitted - 14
+to <- last_submitted + 14
 
 
 
